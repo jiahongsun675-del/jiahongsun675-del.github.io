@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>孙嘉鸿｜品牌、内容与视觉</title>
+<meta name="description" content="孙嘉鸿的职业叙事作品集：从广告学到人形机器人赛道，一个技术品牌传播者的起点、验证、深入与思考。">
+<style>
+/* ============ TOKENS (paper & ink) ============ */
+:root{
+  --paper: #f4f1e8;
+  --paper-soft: #ece9de;
+  --ink: #141414;
+  --ink-dim: rgba(20,20,20,0.6);
+  --ink-faint: rgba(20,20,20,0.14);
+  --black: #101010;
+  --onblack: #f4f1e8;
+  --onblack-dim: rgba(244,241,232,0.55);
+  --f-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --f-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --s2:.5rem; --s3:.75rem; --s4:1rem; --s6:1.5rem; --s8:2rem; --s12:3rem; --s16:4rem; --s20:5rem;
+}
+/* ============ BASE ============ */
+*,*::before,*::after{ box-sizing: border-box; margin: 0; padding: 0; }
+html{ scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body{
+  background: var(--paper); color: var(--ink);
+  font-family: var(--f-system); font-size: 1.0625rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+::selection{ background: var(--ink); color: var(--paper); }
+img{ max-width: 100%; display: block; }
+a{ color: inherit; text-decoration: none; }
+a:focus-visible{ outline: 2px solid var(--ink); outline-offset: 3px; }
+.wrap{ width: min(100% - 2.5rem, 74rem); margin-inline: auto; }
+.mono{ font-family: var(--f-mono); }
+/* ============ PILL NAV ============ */
+.nav{
+  position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px; box-shadow: 0 2px 18px rgba(20,20,20,0.10), 0 0 0 1px rgba(20,20,20,0.05);
+  padding: 0.45rem 0.55rem 0.45rem 1.35rem;
+  display: flex; align-items: center; gap: clamp(0.9rem, 3vw, 2rem);
+  max-width: calc(100% - 2rem); white-space: nowrap;
+}
+.nav-brand{ font-weight: 700; font-size: 0.9375rem; letter-spacing: -0.01em; }
+.nav-links{ display: flex; gap: clamp(0.7rem, 2.4vw, 1.5rem); list-style: none; }
+.nav-links a{ font-size: 0.8125rem; font-weight: 500; opacity: 0.65; transition: opacity 200ms ease; padding: 0.5rem 0; }
+.nav-links a:hover{ opacity: 1; }
+.nav-cta{
+  background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 600;
+  border-radius: 999px; padding: 0.55rem 1.1rem; letter-spacing: 0.02em;
+  transition: transform 250ms var(--ease-out);
+}
+.nav-cta:hover{ transform: scale(1.04); }
+/* ============ KICKER (mono label + hairline) ============ */
+.kick{
+  display: flex; align-items: center; gap: var(--s4);
+  font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: var(--s8);
+}
+.kick::after{ content: ""; flex: 1; height: 1px; background: currentColor; opacity: 0.25; }
+/* ============ HERO ============ */
+.hero{
+  min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 7rem 1.25rem 4rem; position: relative;
+}
+.hero-avatar{
+  width: 5.5rem; height: 5.5rem; border-radius: 50%; object-fit: cover; object-position: center 18%;
+  margin-bottom: var(--s8); box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--ink);
+}
+.hero-eyebrow{ font-family: var(--f-mono); font-size: 0.8125rem; letter-spacing: 0.14em; color: var(--ink-dim); margin-bottom: var(--s6); }
+.hero-title{
+  font-size: clamp(4.5rem, 15vw, 12.5rem); font-weight: 800; line-height: 0.98;
+  letter-spacing: -0.045em; margin-bottom: var(--s6);
+}
+.hero-sub{
+  font-size: clamp(1.35rem, 3.4vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em;
+  color: var(--ink-dim); max-width: 26em; line-height: 1.4;
+}
+.hero-sub b{ color: var(--ink); font-weight: 700; }
+.hero-links{ margin-top: var(--s8); display: flex; gap: var(--s4); flex-wrap: wrap; justify-content: center; }
+.pill-link{
+  display: inline-flex; align-items: center; gap: 0.4em; min-height: 44px;
+  font-size: 0.9375rem; font-weight: 600; border: 1.5px solid var(--ink); border-radius: 999px;
+  padding: 0.6rem 1.4rem; transition: background 250ms ease, color 250ms ease, transform 250ms var(--ease-out);
+}
+.pill-link:hover{ background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+.pill-link.solid{ background: var(--ink); color: var(--paper); }
+.pill-link.solid:hover{ background: transparent; color: var(--ink); }
+/* ============ MARQUEE ============ */
+.marquee{ background: var(--black); color: var(--onblack); overflow: hidden; }
+.marquee-track{ display: flex; width: max-content; animation: mq 26s linear infinite; }
+.marquee:hover .marquee-track{ animation-play-state: paused; }
+.marquee-track span{
+  font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 800; letter-spacing: -0.035em;
+  white-space: nowrap; padding: var(--s8) 0; line-height: 1.1;
+}
+.marquee-track i{ font-style: normal; color: var(--onblack-dim); margin: 0 0.35em; }
+@keyframes mq{ to{ transform: translateX(-50%); } }
+/* ============ SECTIONS ============ */
+.section{ padding: clamp(4.5rem, 11vh, 8rem) 0; }
+.section-dark{ background: var(--black); color: var(--onblack); }
+/* ============ STATS ============ */
+.stats-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s8) var(--s4); }
+@media (min-width: 760px){ .stats-grid{ grid-template-columns: repeat(4, 1fr); } }
+.stat-num{ font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.stat-num .unit{ font-size: 0.36em; font-weight: 600; color: var(--ink-dim); margin-left: 0.2em; letter-spacing: 0; }
+.stat-label{ margin-top: var(--s3); font-size: 0.8125rem; color: var(--ink-dim); font-weight: 500; line-height: 1.65; }
+/* ============ CHAPTERS ============ */
+.chapter{ border-top: 1.5px solid var(--ink); }
+.ch-index{
+  font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px var(--ink); opacity: 0.85;
+  margin-bottom: var(--s6);
+}
+.ch-title{
+  font-size: clamp(2.5rem, 6.5vw, 5rem); font-weight: 800; line-height: 1.05;
+  letter-spacing: -0.04em; margin-bottom: var(--s8); max-width: 15em;
+}
+.ch-body{ max-width: 36em; font-size: 1.125rem; line-height: 1.85; }
+.ch-body p + p{ margin-top: var(--s6); }
+.ch-body .lead{
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; line-height: 1.4;
+  letter-spacing: -0.025em; padding-top: var(--s4);
+}
+.ch-body b{ font-weight: 700; }
+/* ============ DARK THINKING ============ */
+.dark-source{ font-size: 1rem; color: var(--onblack-dim); max-width: 38em; margin-bottom: var(--s12); line-height: 1.8; }
+.dark-source b{ color: var(--onblack); font-weight: 600; }
+.insight-quote{
+  font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.08;
+  letter-spacing: -0.04em; margin-bottom: var(--s16);
+}
+.insight-quote .thin{ color: var(--onblack-dim); }
+.insight-list{ display: grid; gap: 0; border-top: 1px solid rgba(244,241,232,0.2); }
+.insight{
+  display: grid; grid-template-columns: 1fr; gap: var(--s3);
+  padding: var(--s8) 0; border-bottom: 1px solid rgba(244,241,232,0.2);
+}
+.insight-num{ font-family: var(--f-mono); font-size: 0.8125rem; color: var(--onblack-dim); letter-spacing: 0.1em; }
+.insight-title{ font-size: clamp(1.5rem, 3.4vw, 2.25rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; }
+.insight-body{ font-size: 1rem; line-height: 1.75; color: var(--onblack-dim); max-width: 42rem; }
+.insight-body .mono{ color: var(--onblack); font-size: 0.9em; }
+@media (min-width: 800px){ .insight{ grid-template-columns: 5rem 1fr; } .insight-body{ grid-column: 2; } .insight-title{ grid-column: 2; grid-row: 1; } .insight-num{ grid-row: 1 / span 2; padding-top: 0.5em; } }
+/* ============ JD MAP / BUILD ROWS ============ */
+.rows{ border-top: 1.5px solid var(--ink); margin-top: var(--s12); }
+.row{
+  display: grid; grid-template-columns: 1fr; gap: var(--s2);
+  padding: var(--s6) 0; border-bottom: 1px solid var(--ink-faint);
+}
+.row-key{ font-size: 1.125rem; font-weight: 700; letter-spacing: -0.015em; display: flex; align-items: baseline; gap: var(--s3); }
+.row-key::before{ content: attr(data-i); font-family: var(--f-mono); font-size: 0.75rem; font-weight: 500; color: var(--ink-dim); }
+.row-key .mono{ font-family: var(--f-mono); font-size: 0.75rem; font-weight: 500; color: var(--ink-dim); letter-spacing: 0.08em; }
+.row-val{ font-size: 0.9375rem; color: var(--ink-dim); line-height: 1.75; }
+.row-val b{ color: var(--ink); font-weight: 700; }
+@media (min-width: 760px){ .row{ grid-template-columns: 17rem 1fr; gap: var(--s8); align-items: baseline; } }
+</style>
+<style>
+/* ============ WORKS (black) ============ */
+.works{ background: var(--black); color: var(--onblack); padding: 0 0 var(--s20); }
+.works-inner{ padding-top: var(--s16); }
+.works-head{
+  font-size: clamp(2.5rem, 6.5vw, 5rem); font-weight: 800; letter-spacing: -0.04em;
+  line-height: 1.05; margin-bottom: var(--s4);
+}
+.works-sub{ color: var(--onblack-dim); font-size: 0.9375rem; margin-bottom: var(--s16); }
+.wgroup{ margin-bottom: var(--s16); }
+.wgroup:last-child{ margin-bottom: 0; }
+.wgrid{ display: grid; grid-template-columns: 1fr; gap: var(--s8) var(--s6); }
+@media (min-width: 620px){ .wgrid{ grid-template-columns: repeat(2, 1fr); } .wcard.feat{ grid-column: 1 / -1; } }
+@media (min-width: 980px){
+  .wgrid.cols-3{ grid-template-columns: repeat(3, 1fr); }
+  .wgrid.cols-4{ grid-template-columns: repeat(4, 1fr); }
+  .wcard.feat{ grid-column: 1 / -1; }
+}
+.wcard{ display: block; }
+.wcard-img{
+  position: relative; display: block; overflow: hidden; background: #1c1c1c; border-radius: 4px;
+  aspect-ratio: 4 / 3;
+}
+.wcard-img.tall{ aspect-ratio: 4 / 4.8; }
+.wcard.feat .wcard-img{ aspect-ratio: 16 / 7; }
+@media (max-width: 619px){ .wcard.feat .wcard-img{ aspect-ratio: 4 / 3; } }
+.wcard-img img{
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  transition: transform 900ms var(--ease-out), opacity 500ms ease;
+}
+.wcard:hover .wcard-img img{ transform: scale(1.05); }
+.wcard-badge{
+  position: absolute; left: 0.75rem; top: 0.75rem; z-index: 1;
+  font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.06em;
+  background: var(--paper); color: var(--ink); padding: 0.3rem 0.7rem; border-radius: 999px;
+}
+.wcard-cap{
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s4);
+  padding-top: var(--s4);
+}
+.wcard-name{ display: block; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.015em; line-height: 1.4; }
+.wcard-tags{ display: block; margin-top: var(--s2); font-family: var(--f-mono); font-size: 0.6875rem; color: var(--onblack-dim); letter-spacing: 0.05em; line-height: 1.7; }
+.wcard-plus{
+  flex: none; width: 2.25rem; height: 2.25rem; background: var(--onblack); color: var(--ink);
+  display: grid; place-items: center; font-size: 1.35rem; font-weight: 500; line-height: 1;
+  transition: transform 350ms var(--ease-out);
+}
+.wcard:hover .wcard-plus{ transform: rotate(90deg); }
+/* pan viewport for long images */
+.wcard-img.pan{ aspect-ratio: auto; height: 21rem; }
+.pan-viewport img{ position: absolute; top: 0; left: 0; width: 100%; height: auto; min-height: 100%; object-fit: cover; object-position: top; transition: transform 5s cubic-bezier(0.45,0,0.35,1); }
+.wcard:hover .pan-viewport img{ transform: translateY(calc(21rem - 100%)); }
+/* locked rows on black */
+.locked-list{ display: grid; gap: var(--s3); }
+.locked{
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+  border: 1.5px dashed rgba(244,241,232,0.35); border-radius: 4px; padding: var(--s5, 1.25rem) var(--s6);
+}
+.locked .wcard-name{ color: var(--onblack); }
+.locked .wcard-tags{ margin-top: var(--s2); }
+.locked-tag{ font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.1em; color: var(--onblack-dim); flex: none; }
+/* ============ FLIP CARDS ============ */
+.flip-card{ cursor: pointer; perspective: 1200px; }
+.flip-card:focus-visible{ outline: 2px solid var(--onblack); outline-offset: 4px; }
+.flip-inner{ position: relative; transform-style: preserve-3d; transition: transform 700ms var(--ease-out); }
+.flip-card.flipped .flip-inner{ transform: rotateY(180deg); }
+.flip-front{ backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back{
+  position: absolute; inset: 0; transform: rotateY(180deg);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: var(--onblack); color: var(--ink); border-radius: 4px;
+  padding: var(--s6); display: flex; flex-direction: column; gap: var(--s3);
+  overflow: hidden;
+}
+.flip-back-kicker{ font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.12em; color: var(--ink-dim); text-transform: uppercase; }
+.flip-back-title{ font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.3; }
+.flip-back-desc{ font-size: 0.875rem; line-height: 1.75; color: var(--ink-dim); flex: 1; }
+.flip-back-link{
+  align-self: flex-start; font-size: 0.875rem; font-weight: 600;
+  background: var(--ink); color: var(--onblack); border-radius: 999px; padding: 0.55rem 1.15rem;
+  transition: transform 250ms var(--ease-out), opacity 250ms ease; min-height: 44px;
+  display: inline-flex; align-items: center;
+}
+.flip-back-link:hover{ transform: translateX(3px); }
+.flip-hint{ font-family: var(--f-mono); font-size: 0.625rem; letter-spacing: 0.1em; color: var(--onblack-dim); margin-top: var(--s2); }
+/* ============ FOOTER ============ */
+.footer{ padding: var(--s20) 0 var(--s8); text-align: center; }
+.footer-cta{
+  font-size: clamp(3rem, 10vw, 8.5rem); font-weight: 800; line-height: 1.02;
+  letter-spacing: -0.045em; margin-bottom: var(--s12);
+}
+.footer-links{ display: flex; justify-content: center; gap: var(--s4); flex-wrap: wrap; margin-bottom: var(--s16); }
+.footer-meta{
+  border-top: 1.5px solid var(--ink); padding-top: var(--s6);
+  display: flex; justify-content: space-between; gap: var(--s3) var(--s6); flex-wrap: wrap;
+  font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-dim); text-align: left;
+}
+/* ============ RESUME ============ */
+.res-grid{ display: grid; grid-template-columns: 1fr; gap: var(--s12); }
+@media (min-width: 900px){ .res-grid{ grid-template-columns: 19rem 1fr; gap: var(--s16); } }
+.res-block{ padding: var(--s6) 0; border-top: 1px solid var(--ink-faint); }
+.res-block:first-child{ border-top: none; padding-top: 0; }
+.res-h{ font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: var(--s4); }
+.res-item + .res-item{ margin-top: var(--s4); }
+.res-item-title{ font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.015em; line-height: 1.45; }
+.res-item-sub{ font-size: 0.875rem; color: var(--ink-dim); line-height: 1.75; margin-top: 0.2rem; }
+.res-list{ list-style: none; }
+.res-li{ font-size: 0.9375rem; line-height: 1.75; padding-left: 1.1em; position: relative; }
+.res-li::before{ content: ""; position: absolute; left: 0; top: 0.78em; width: 0.45em; height: 1.5px; background: var(--ink); }
+.exp-list{ border-top: 1.5px solid var(--ink); }
+.exp{ display: grid; grid-template-columns: 1fr; gap: var(--s2); padding: var(--s6) 0; border-bottom: 1px solid var(--ink-faint); }
+.exp-date{ font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-dim); padding-top: 0.35em; }
+.exp-org{ font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; margin-bottom: var(--s3); }
+.exp-body ul{ list-style: none; }
+.exp-li{ font-size: 0.9375rem; line-height: 1.8; color: var(--ink-dim); padding-left: 1.1em; position: relative; }
+.exp-li b{ color: var(--ink); font-weight: 700; }
+.exp-li::before{ content: ""; position: absolute; left: 0; top: 0.86em; width: 0.45em; height: 1.5px; background: var(--ink); }
+@media (min-width: 760px){ .exp{ grid-template-columns: 9.5rem 1fr; gap: var(--s8); } }
+/* ============ TEXT EDIT MODE ============ */
+.edit-bar{
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 60;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--f-mono); font-size: 0.75rem;
+}
+.edit-btn{
+  border: none; cursor: pointer; border-radius: 999px; padding: 0.6rem 1.15rem;
+  background: var(--ink); color: var(--paper); font: inherit; font-weight: 600;
+  box-shadow: 0 4px 18px rgba(20,20,20,0.25);
+  transition: transform 250ms var(--ease-out); min-height: 44px;
+}
+.edit-btn:hover{ transform: translateY(-2px); }
+.edit-btn.ghost{ background: rgba(255,255,255,0.94); color: var(--ink); box-shadow: 0 0 0 1px rgba(20,20,20,0.15); }
+.edit-hint{
+  background: rgba(255,255,255,0.94); border-radius: 999px; padding: 0.55rem 1rem;
+  box-shadow: 0 0 0 1px rgba(20,20,20,0.12); color: var(--ink-dim); letter-spacing: 0.02em;
+}
+body.editing [contenteditable="true"]{
+  outline: 1.5px dashed rgba(20,20,20,0.4); outline-offset: 3px; border-radius: 2px; cursor: text;
+}
+body.editing [contenteditable="true"]:hover{ background: rgba(20,20,20,0.05); }
+body.editing [contenteditable="true"]:focus{ outline: 1.5px solid var(--ink); background: rgba(20,20,20,0.03); }
+.section-dark body.editing [contenteditable="true"]{ outline-color: rgba(244,241,232,0.5); }
+body.editing .section-dark [contenteditable="true"],
+body.editing .works [contenteditable="true"]{ outline-color: rgba(244,241,232,0.5); }
+body.editing .section-dark [contenteditable="true"]:hover,
+body.editing .works [contenteditable="true"]:hover{ background: rgba(244,241,232,0.08); }
+.edit-toast{
+  position: fixed; left: 50%; bottom: 4.75rem; transform: translateX(-50%) translateY(8px);
+  background: var(--ink); color: var(--paper); font-family: var(--f-mono); font-size: 0.75rem;
+  padding: 0.5rem 1.1rem; border-radius: 999px; opacity: 0; pointer-events: none;
+  transition: opacity 300ms ease, transform 300ms var(--ease-out); z-index: 61; letter-spacing: 0.04em;
+}
+.edit-toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+.fade-up{ will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  html{ scroll-behavior: auto; }
+}
+</style>
+<link rel="stylesheet" href="/personal/editor.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="#top">孙嘉鸿。</a>
+  <ul class="nav-links">
+    <li><a href="#ch1">故事</a></li>
+    <li><a href="#ch4">思考</a></li>
+    <li><a href="#resume">简历</a></li>
+    <li><a href="#works">作品</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">联系我</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <img class="hero-avatar hero-in" src="/portrait.png" alt="孙嘉鸿">
+  <p class="hero-eyebrow hero-in">SUN JIAHONG / 品牌 · 内容 · 视觉</p>
+  <h1 class="hero-title hero-in">孙嘉鸿。</h1>
+  <p class="hero-sub hero-in">从广告学出发，走进汽车与机器人行业。<br><b>把复杂的技术，讲成更多人愿意听的故事。</b></p>
+  <div class="hero-links hero-in">
+    <a class="pill-link solid" href="#ch1">读我的故事 ↓</a>
+    <a class="pill-link" href="#contact">直接联系 ↗</a>
+  </div>
+</header>
+
+<!-- ============ MARQUEE 01 ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>起点<i>·</i>验证<i>·</i>深入<i>·</i>思考<i>·</i>证据<i>·</i></span>
+    <span>起点<i>·</i>验证<i>·</i>深入<i>·</i>思考<i>·</i>证据<i>·</i></span>
+  </div>
+</div>
+
+<!-- ============ TLDR STATS ============ -->
+<section class="section" aria-label="速览">
+  <div class="wrap">
+    <p class="kick fade-up">TL;DR — 30 秒速览</p>
+    <div class="stats-grid">
+      <div class="fade-up">
+        <p class="stat-num">5<span class="unit">段</span></p>
+        <p class="stat-label">品牌、内容与媒体经历<br>出版 · 新闻媒体 · 显示 · 汽车 · 机器人</p>
+      </div>
+      <div class="fade-up">
+        <p class="stat-num">30万<span class="unit">+ 曝光</span></p>
+        <p class="stat-label">50 篇对外稿件 · 80 家媒体渠道<br>GEO 优化带动搜索曝光 +40%</p>
+      </div>
+      <div class="fade-up">
+        <p class="stat-num">3<span class="unit">场</span></p>
+        <p class="stat-label">机器人行业活动传播<br>WAIC · WRC · 世界人形机器人运动会</p>
+      </div>
+      <div class="fade-up">
+        <p class="stat-num">4<span class="unit">案</span></p>
+        <p class="stat-label">全国大广节学院奖<br>铜奖 1 · 优秀奖 2 · 策划案 1</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 01 ============ -->
+<section class="section chapter" id="ch1">
+  <div class="wrap">
+    <p class="ch-index fade-up" aria-hidden="true">01</p>
+    <p class="kick fade-up">起点 / ORIGIN</p>
+    <h2 class="ch-title fade-up">一切，从一辆车开始。</h2>
+    <div class="ch-body fade-up">
+      <p>大学时，我在广告学工作室参与一汽-大众探歌的品牌年轻化策划。面对一台车，我开始思考：产品的技术特点，怎样才能变成年轻人愿意了解的内容？</p>
+      <p>从洞察、创意到视觉表达，广告学让我学会组织信息，也让我逐渐找到自己感兴趣的方向：<b>让有技术含量的产品，被更多人理解。</b>学院奖策划实践中，力诚蟹棒方案获铜奖，江中与云南白药方案获优秀奖。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 02 ============ -->
+<section class="section chapter" id="ch2">
+  <div class="wrap">
+    <p class="ch-index fade-up" aria-hidden="true">02</p>
+    <p class="kick fade-up">验证 / PROOF</p>
+    <h2 class="ch-title fade-up">把技术，翻译成人话。</h2>
+    <div class="ch-body fade-up">
+      <p>在京东方艺云，我参与小课屏新品上市传播，撰写与协同发布内容：<b>50 篇稿件、30 万+阅读曝光、80 家媒体渠道，GEO 优化让搜索曝光提升约 40%</b>。在这里学会第一课：量产内容，但不稀释质量。</p>
+      <p>然后是理想汽车，我真正钻进了技术里。协同研发与产品团队梳理技术信息，把 <b>VLM 智驾、自研芯片、线控底盘</b>写成 C 端用户愿意看的内容；跑车展，上 L8、L9 发布会和家庭科技日的传播一线；顺手用 Claude Code 写了个 Python 脚本，给自己搭了一块竞品内容监测看板。</p>
+      <p class="lead">广告学教会我表达。<br>理想教会我——表达之前，先搞懂技术本身。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 03 ============ -->
+<section class="section chapter" id="ch3">
+  <div class="wrap">
+    <p class="ch-index fade-up" aria-hidden="true">03</p>
+    <p class="kick fade-up">深入 / DEPTH</p>
+    <h2 class="ch-title fade-up">走进赛道的正中央。</h2>
+    <div class="ch-body fade-up">
+      <p>在松延动力品牌公关部，我开始参与人形机器人行业的传播。<b>WAIC、WRC、世界人形机器人运动会</b>——媒体邀约、采访 QA、现场传播、会后沉淀，这些活动成为了具体的工作场景。</p>
+      <p>我也参与创始人 IP 的选题、内容框架和稿件打磨；围绕运控技术、世界模型、Agent 等方向，整理信息并撰写通稿与公众号内容。</p>
+      <p class="lead">这个行业不缺技术，<br>缺的是<b>把技术讲明白的人</b>。我想干这个。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER 04 (DARK) ============ -->
+<section class="section section-dark" id="ch4">
+  <div class="wrap">
+    <p class="kick fade-up">思考 / THINKING</p>
+    <p class="dark-source fade-up">工作之外，我刷得最多的是<b>晚点LatePost、36氪、数字生命卡兹克</b>这类科技媒体。看得多了，慢慢长出自己的判断——</p>
+    <p class="insight-quote fade-up">机器人品牌做到最后，<br><span class="thin">拼的是让人放心。</span></p>
+    <div class="insight-list">
+      <div class="insight fade-up">
+        <span class="insight-num">/ 01</span>
+        <h3 class="insight-title">让最难的技术，拿到应得的传播分</h3>
+        <p class="insight-body">如果一个演示的难点没有被解释，观众就很难判断它的价值。我希望从任务、环境和失败条件讲起，用对比与过程说明<b>“难在哪里”</b>，再让观众理解技术进步意味着什么。</p>
+      </div>
+      <div class="insight fade-up">
+        <span class="insight-num">/ 02</span>
+        <h3 class="insight-title">少讲参数，多讲画面</h3>
+        <p class="insight-body">写技术内容时，我会继续追问：这个参数改善了谁的体验？在什么条件下成立？<b>把性能放回场景，说明能解决的问题与适用边界</b>，表达才更有说服力。</p>
+      </div>
+      <div class="insight fade-up">
+        <span class="insight-num">/ 03</span>
+        <h3 class="insight-title">选择一个能被体验的能力入口</h3>
+        <p class="insight-body">我关注 AI 品牌怎样把宽泛的能力变成用户能够上手的体验。比如 Coding：生成结果、修改过程和实际效果都更容易被看见。我想把这套思路带进技术传播，让产品、品牌与内容围绕<b>可验证的任务</b>共同打磨表达。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EPILOGUE ============ -->
+<section class="section chapter" id="ch5">
+  <div class="wrap">
+    <p class="ch-index fade-up" aria-hidden="true">05</p>
+    <p class="kick fade-up">能力 / WHAT I DO</p>
+    <h2 class="ch-title fade-up">理解复杂，<br>表达清楚，推进落地。</h2>
+    <div class="ch-body fade-up">
+      <p>从内容与视觉表达，到账号运营与项目协同，这是我持续积累的五个方向。</p>
+    </div>
+    <div class="rows">
+      <div class="row fade-up">
+        <span class="row-key" data-i="01">物料体系 · 平面与视频输出</span>
+        <span class="row-val">广告学策划训练与学院奖作品，积累了从洞察、文案到方案呈现的经验；参与央广网长图制作，在信息层级与视觉表达之间寻找平衡。</span>
+      </div>
+      <div class="row fade-up">
+        <span class="row-key" data-i="02">新媒体矩阵运营</span>
+        <span class="row-val">在湛庐管理抖音、公众号、小红书账号，在理想参与 B 站、视频号及个人 IP 内容运营，覆盖选题、脚本、拍摄配合、切片分发与发布跟进。</span>
+      </div>
+      <div class="row fade-up">
+        <span class="row-key" data-i="03">年轻化内容</span>
+        <span class="row-val">从探歌品牌年轻化策划，到技术稿件与公众号内容，尝试用受众熟悉的语言、人物与场景，解释产品和技术价值。</span>
+      </div>
+      <div class="row fade-up">
+        <span class="row-key" data-i="04">大型项目执行</span>
+        <span class="row-val">参与车展、L8/L9 发布会、家庭科技日及 WAIC、WRC、机器人运动会相关传播，推进媒体沟通、QA、物料和发布跟进。</span>
+      </div>
+      <div class="row fade-up">
+        <span class="row-key" data-i="05">趋势洞察 · 品牌判断</span>
+        <span class="row-val">日常关注晚点、36氪、数字生命卡兹克等科技内容，结合行业观察与工作反馈，持续打磨自己的选题判断。</span>
+      </div>
+    </div>
+    <div class="ch-body fade-up" style="margin-top: var(--s12);">
+      <p class="lead">我不想只做"发稿的人"。<br><b>我想把技术理解、内容表达和项目执行连起来。</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section class="section chapter" id="resume">
+  <div class="wrap">
+    <p class="kick fade-up">简历 / RÉSUMÉ</p>
+    <h2 class="ch-title fade-up">从工作室，<br>走到行业现场。</h2>
+    <div class="res-grid">
+      <div class="res-side">
+        <div class="res-block fade-up">
+          <h3 class="res-h">教育背景</h3>
+          <div class="res-item">
+            <p class="res-item-title">东北师范大学 · 新闻与传播（硕士）</p>
+            <p class="res-item-sub">2024.08 – 2027.06 · 主修：营销与策略传播实务、媒介经营与管理、IMC 战略传播、广告策划与创意</p>
+          </div>
+          <div class="res-item">
+            <p class="res-item-title">东北师范大学人文学院 · 广告学（本科）</p>
+            <p class="res-item-sub">2018.09 – 2022.06</p>
+          </div>
+        </div>
+        <div class="res-block fade-up">
+          <h3 class="res-h">技能与证书</h3>
+          <ul class="res-list">
+            <li class="res-li">CET-4 / CET-6 · 普通话一级乙等</li>
+            <li class="res-li">PS · 剪映 · PR 基础剪辑 · 办公软件</li>
+            <li class="res-li">熟练用 AI 工具干活：Claude Code、Codex 等 Vibe Coding，会 AI 生成视频</li>
+            <li class="res-li">初级会计资格证 · 教师资格证 · C2 驾驶证</li>
+          </ul>
+        </div>
+        <div class="res-block fade-up">
+          <h3 class="res-h">荣誉奖励</h3>
+          <ul class="res-list">
+            <li class="res-li">国家励志奖学金</li>
+            <li class="res-li">时报金犊奖 · 优秀奖</li>
+            <li class="res-li">全国大广节学院奖 · 策划类铜奖 1、优秀奖 2</li>
+            <li class="res-li">优秀学生干部</li>
+          </ul>
+        </div>
+        <div class="res-block fade-up">
+          <h3 class="res-h">校园经历</h3>
+          <p class="res-item-sub">本科班长、创新实践部部长、团委组织部部长、青马协会副会长；研究生团支书。</p>
+        </div>
+      </div>
+      <div class="res-main">
+        <h3 class="res-h fade-up">实践经历</h3>
+        <div class="exp-list"><article class="exp fade-up"><p class="exp-date mono" data-copy="studio-date">本科期间</p><div class="exp-body"><h4 class="exp-org" data-copy="studio-org">广告学工作室 · 品牌策划与创意实践</h4><ul><li class="exp-li"><b data-copy="studio-task-0-label">品牌策划：</b><span data-copy="studio-task-0-copy">参与一汽-大众探歌品牌年轻化策划，围绕受众洞察、品牌定位和内容创意展开训练。</span></li><li class="exp-li"><b data-copy="studio-task-1-label">方案与视觉：</b><span data-copy="studio-task-1-copy">在广告学课程及策划实践中，完成从资料研究、策略组织、创意文案到方案呈现的工作，逐渐形成内容与视觉一起思考的习惯。</span></li><li class="exp-li"><b data-copy="studio-task-2-label">作品积累：</b><span data-copy="studio-task-2-copy">策划作品包括力诚蟹棒、江中健胃消食片、云南白药泵式牙膏与桃花姬；其中力诚蟹棒获学院奖铜奖，江中与云南白药方案获优秀奖。</span></li></ul></div></article>
+<article class="exp fade-up"><p class="exp-date mono" data-copy="cheers-date">2023.09 — 2024.06</p><div class="exp-body"><h4 class="exp-org" data-copy="cheers-org">北京湛庐文化 · 新渠道部营销专员</h4><ul><li class="exp-li"><b data-copy="cheers-task-0-label">账号运营：</b><span data-copy="cheers-task-0-copy">管理抖音、公众号、小红书等社交媒体账号，策划热点主题视频并参与出镜拍摄。简历记录的内容平均播放量 ≥5000，运营期间粉丝增长 20000+。</span></li><li class="exp-li"><b data-copy="cheers-task-1-label">直播执行：</b><span data-copy="cheers-task-1-copy">参与直播带货、直播前选品沟通与产品卖点梳理，并根据直播表现整理反馈。自播日均 GMV 3000+，最高 GMV 20 万。</span></li><li class="exp-li"><b data-copy="cheers-task-2-label">商务协同：</b><span data-copy="cheers-task-2-copy">参与头部博主直播电商合作，跟进选品与推广策略；参与项目单场销售额达 200 万元，该数据为合作场次结果。</span></li></ul></div></article>
+<article class="exp fade-up"><p class="exp-date mono" data-copy="boe-date">2024 寒假 / 2025 暑假</p><div class="exp-body"><h4 class="exp-org" data-copy="boe-org">京东方艺云 · 品牌公关实习生</h4><ul><li class="exp-li"><b data-copy="boe-task-0-label">上市传播：</b><span data-copy="boe-task-0-copy">参与“小课屏 T40/P40”新品上市与整合营销，输出公关稿、宣传稿及商详页文案约 50 篇，对应内容累计阅读曝光超 30 万。</span></li><li class="exp-li"><b data-copy="boe-task-1-label">媒体协同：</b><span data-copy="boe-task-1-copy">协调外部公关公司与主流媒体，跟进稿件审校、发稿排期及媒体计划；整理发布结果和媒体反馈，覆盖超 80 家媒体渠道。</span></li><li class="exp-li"><b data-copy="boe-task-2-label">搜索传播：</b><span data-copy="boe-task-2-copy">协助 GEO 传播策略优化，跟进内容调整与传播反馈。简历记录相关项目搜索曝光率提升约 40%。</span></li><li class="exp-li"><b data-copy="boe-task-3-label">商务合作：</b><span data-copy="boe-task-3-copy">对接达人与商务伙伴 50+，参与“小红书 young 妈专场”等推广活动；项目首发当日 GMV 突破 1000 万，为项目整体销售结果。</span></li></ul></div></article>
+<article class="exp fade-up"><p class="exp-date mono" data-copy="cnr-date">2024.07 — 至今</p><div class="exp-body"><h4 class="exp-org" data-copy="cnr-org">央广网吉林频道 · 实习记者</h4><ul><li class="exp-li"><b data-copy="cnr-task-0-label">采编执行：</b><span data-copy="cnr-task-0-copy">协助完成外出采访、政务宣传活动、长图制作及视频剪辑，参与选题、采编、物料输出与线上线下传播。</span></li><li class="exp-li"><b data-copy="cnr-task-1-label">主题项目：</b><span data-copy="cnr-task-1-copy">参与“相约吉林粉雪”“相约最美国道”等网络主题项目选题与创作，接触并维护媒体行业资源。参与主题的全平台话题曝光量超亿次，为话题整体传播结果。</span></li><li class="exp-li"><b data-copy="cnr-task-2-label">素材管理：</b><span data-copy="cnr-task-2-copy">协助统筹项目图文与视频素材，跟进跨平台发布与内容归档，为后续主题项目策划及媒体资源维护提供参考。</span></li></ul></div></article>
+<article class="exp fade-up"><p class="exp-date mono" data-copy="li-auto-date">2025.12 — 2026.07</p><div class="exp-body"><h4 class="exp-org" data-copy="li-auto-org">理想汽车 · 公关部技术传播与媒体关系实习生</h4><ul><li class="exp-li"><b data-copy="li-auto-task-0-label">技术传播：</b><span data-copy="li-auto-task-0-copy">负责日常技术公关筹备与宣传稿件撰写，协同研发及产品部门确认 VLM 智能驾驶、Li OS 智能座舱、OTA、自研芯片及线控底盘等信息，转化为面向 C 端的传播内容。</span></li><li class="exp-li"><b data-copy="li-auto-task-1-label">平台运营：</b><span data-copy="li-auto-task-1-copy">负责 B 站、视频号内容运营及想哥个人账号建设，参与脚本策划、现场拍摄和短视频切片分发；协助头部达人商广投放与商业合作，跟进内容质量。</span></li><li class="exp-li"><b data-copy="li-auto-task-2-label">媒体关系：</b><span data-copy="li-auto-task-2-copy">协助维护核心媒体资源，整理媒体发布汇总与传播效果报告；跟进媒体及达人项目的采购下单、合同签署与报销结算，并按项目归档传播素材和发布结果。</span></li><li class="exp-li"><b data-copy="li-auto-task-3-label">AI 与效率：</b><span data-copy="li-auto-task-3-copy">运用 Claude Code 与 GitHub Skills 辅助开发，独立编写 Python 数据监测脚本，抓取 B 站特定账号与竞品视频数据，搭建自然内容加热监测及媒介资源管理看板。</span></li><li class="exp-li"><b data-copy="li-auto-task-4-label">活动现场：</b><span data-copy="li-auto-task-4-copy">参与车展、L8/L9 发布会与家庭科技日相关传播工作，把稿件生产与现场传播相衔接。</span></li></ul></div></article>
+<article class="exp fade-up"><p class="exp-date mono" data-copy="songyan-date">2026.07 — 至今</p><div class="exp-body"><h4 class="exp-org" data-copy="songyan-org">松延动力 · 品牌公关部实习生</h4><ul><li class="exp-li"><b data-copy="songyan-task-0-label">媒体关系：</b><span data-copy="songyan-task-0-copy">负责日常媒体沟通与关系维护，围绕 WAIC、WRC、世界人形机器人运动会梳理媒体及行业资源，推进选题沟通、采访邀约、现场接待、媒体 QA、信息同步与发布跟进。</span></li><li class="exp-li"><b data-copy="songyan-task-1-label">内容撰写：</b><span data-copy="songyan-task-1-copy">围绕公司产品、技术进展与品牌动态，针对机器人运控技术、世界模型、Agent 等方向，独立或协同撰写公关通稿、公众号稿件及对外传播材料。</span></li><li class="exp-li"><b data-copy="songyan-task-2-label">创始人 IP：</b><span data-copy="songyan-task-2-copy">参与创始人 IP 内容策划与运营，结合行业热点、业务节点及创始人观点提炼选题，准备采访提纲、QA 与观点素材，完成内容框架、稿件撰写和传播节奏规划。</span></li><li class="exp-li"><b data-copy="songyan-task-3-label">传播执行：</b><span data-copy="songyan-task-3-copy">协同业务与研发完成信息采集、内容审核及发布跟进，支持重点项目的预热、现场传播与会后内容沉淀；整理媒体表现和传播反馈，为选题优化与复盘提供支持。</span></li></ul></div></article></div><p class="res-item-sub">项目整体数据与个人工作职责分别表述；时间按所提供简历保留。</p><a class="pill-link" href="/portfolio/sunjiahong-resume.pdf" target="_blank" rel="noopener">完整简历 PDF ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKS (BLACK) ============ -->
+<section class="works" id="works">
+  <div class="marquee" aria-hidden="true" style="background: var(--black);">
+    <div class="marquee-track">
+      <span>作品证据<i>·</i>SELECTED WORKS<i>·</i>作品证据<i>·</i>SELECTED WORKS<i>·</i></span>
+      <span>作品证据<i>·</i>SELECTED WORKS<i>·</i>作品证据<i>·</i>SELECTED WORKS<i>·</i></span>
+    </div>
+  </div>
+  <div class="wrap works-inner">
+    <p class="kick fade-up" style="color: var(--onblack-dim);">APPENDIX — 证据</p>
+    <h2 class="works-head fade-up">上面说的这些，<br>都有东西作证。</h2>
+    <p class="works-sub fade-up">随滚动抽出作品 · 划过封面体验涟漪 · 点击卡片翻面查看详情</p>
+
+    <div class="wgroup">
+      <div class="wgrid cols-3">
+        <div class="wcard feat flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：WAIC 媒体通稿">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">松延动力 · 通稿</span><img src="/portfolio/thumbs/songyan-waic.jpg" alt="WAIC 媒体通稿预览" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">WAIC 世界人工智能大会 · 媒体通稿</span>
+                  <span class="wcard-tags">媒体通稿 / 人形机器人 / 展会传播</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">松延动力 · 媒体通稿</span>
+              <h4 class="flip-back-title">WAIC 世界人工智能大会 · 媒体通稿</h4>
+              <p class="flip-back-desc">围绕 WAIC 展会节点整理产品与技术信息，撰写媒体通稿，参与采访 QA、现场传播及内容发布跟进。</p>
+              <a class="flip-back-link" href="/portfolio/songyan-waic-media-release.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：马赫100 ISCA 2026">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img tall"><span class="wcard-badge">理想汽车 · 新闻稿</span><img src="/personal/assets/cover-mach100.jpg" alt="马赫100 ISCA 2026 稿件预览" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">马赫 100 芯片论文入选 ISCA 2026</span>
+                  <span class="wcard-tags">技术传播 / 自研芯片</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">理想汽车 · 新闻稿</span>
+              <h4 class="flip-back-title">马赫 100 芯片论文入选 ISCA 2026</h4>
+              <p class="flip-back-desc">计算机体系结构顶会的论文成果，写成公众读得懂的产业新闻。动笔之前，先找研发把论文啃下来。</p>
+              <a class="flip-back-link" href="/portfolio/li-auto-m100-isca.docx">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：硅基造物志 CCU">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img tall"><span class="wcard-badge">理想汽车 · 专栏</span><img src="/personal/assets/cover-silicon-ccu.jpg" alt="硅基造物志 CCU 稿件预览" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">硅基造物志 · CCU 整车算力中枢</span>
+                  <span class="wcard-tags">技术专栏 / 写给 C 端看</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">理想汽车 · 技术专栏</span>
+              <h4 class="flip-back-title">硅基造物志 · CCU 整车算力中枢</h4>
+              <p class="flip-back-desc">自研技术专栏「硅基造物志」：把整车算力中枢讲成 C 端用户愿意读完的故事。</p>
+              <a class="flip-back-link" href="/portfolio/li-auto-ccu.docx">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：硅基造物志 数据流编程">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img tall"><span class="wcard-badge">理想汽车 · 专栏</span><img src="/personal/assets/cover-silicon-dataflow.jpg" alt="硅基造物志 数据流稿件预览" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">硅基造物志 · 数据流编程</span>
+                  <span class="wcard-tags">技术专栏 / 写给 C 端看</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">理想汽车 · 技术专栏</span>
+              <h4 class="flip-back-title">硅基造物志 · 数据流编程</h4>
+              <p class="flip-back-desc">数据流编程的硬核概念，翻译成有画面感的科普读物。</p>
+              <a class="flip-back-link" href="/portfolio/li-auto-dataflow.docx">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wgroup"><div class="wgrid"><div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：公众号文字稿合集"><div class="flip-inner"><div class="flip-front"><span class="wcard-img doc-cover"><span>SELECTED WRITING / 内容运营</span><strong>公众号<br>文字稿合集</strong></span><span class="wcard-cap"><span><span class="wcard-name">公众号文字稿合集</span><span class="wcard-tags">显示产业 / 内容运营</span></span><span class="wcard-plus">+</span></span></div><div class="flip-back"><span class="flip-back-kicker">公众号 · 内容运营</span><h4 class="flip-back-title">公众号文字稿合集</h4><p class="flip-back-desc">围绕 AI 工厂、显示产业与生态协同持续选题，建立从行业趋势到企业价值的内容表达。</p><a class="flip-back-link" href="/portfolio/wechat-writing-collection.docx" target="_blank" rel="noopener">查看原件 ↗</a><span class="flip-hint">再次点击卡片返回</span></div></div></div></div></div>
+    <div class="wgroup">
+      <p class="kick fade-up" style="color: var(--onblack-dim);">品牌策划案 · 学院奖</p>
+      <div class="wgrid cols-4">
+        <div class="wcard feat flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：片仔癀皇后珍珠膏策划案">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">营销策划案</span><img src="/personal/assets/cover-pianzaihuang.jpg" alt="片仔癀皇后珍珠膏策划案封面" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">国妆 4S，「珍」的有一套</span>
+                  <span class="wcard-tags">片仔癀皇后珍珠膏 / 品牌营销策划 · 26 页全案</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">营销策划案 · 26 页全案</span>
+              <h4 class="flip-back-title">国妆 4S，「珍」的有一套</h4>
+              <p class="flip-back-desc">片仔癀皇后珍珠膏品牌营销策划案：国妆老字号的年轻化打法，从洞察、策略到传播执行的完整全案。</p>
+              <a class="flip-back-link" href="/portfolio/pianzaihuang.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：力诚蟹棒策划案">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">学院奖 · 铜奖</span><img src="/portfolio/thumbs/licheng-crab.jpg" alt="力诚蟹棒策划案封面" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">"鱼额不足，力诚来补"</span>
+                  <span class="wcard-tags">力诚蟹棒 / 整合营销</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">学院奖 · 铜奖</span>
+              <h4 class="flip-back-title">"鱼额不足，力诚来补"</h4>
+              <p class="flip-back-desc">力诚蟹棒整合营销策划：从洞察到传播的全案闭环，也是大学时期的获奖起点。</p>
+              <a class="flip-back-link" href="/portfolio/licheng-crab-campaign.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：江中策划案">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">学院奖 · 优秀奖</span><img src="/portfolio/thumbs/jiangzhong.jpg" alt="江中策划案封面" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">"喂喂喂胃，对自己好一点"</span>
+                  <span class="wcard-tags">江中健胃消食片 / 品牌年轻化</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">学院奖 · 优秀奖</span>
+              <h4 class="flip-back-title">"喂喂喂胃，对自己好一点"</h4>
+              <p class="flip-back-desc">江中健胃消食片品牌年轻化：用同龄人的语境重写传统品牌。</p>
+              <a class="flip-back-link" href="/portfolio/jiangzhong-campaign.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：云南白药策划案">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">学院奖 · 优秀奖</span><img src="/portfolio/thumbs/yunnan-baiyao.jpg" alt="云南白药策划案封面" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">"拒绝躺平，享泵就蹦"</span>
+                  <span class="wcard-tags">云南白药 / 新品推广</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">学院奖 · 优秀奖</span>
+              <h4 class="flip-back-title">"拒绝躺平，享泵就蹦"</h4>
+              <p class="flip-back-desc">云南白药泵式牙膏新品推广：把一个功能创新点讲成一种生活态度。</p>
+              <a class="flip-back-link" href="/portfolio/yunnan-baiyao-campaign.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+        <div class="wcard flip-card fade-up" data-flip role="button" tabindex="0" aria-label="翻面查看详情：桃花姬策划案">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <span class="wcard-img"><span class="wcard-badge">整合策划</span><img src="/portfolio/thumbs/ejiao.jpg" alt="桃花姬策划案封面" loading="lazy"></span>
+              <span class="wcard-cap">
+                <span>
+                  <span class="wcard-name">"桃出脆皮，Buff 升级"</span>
+                  <span class="wcard-tags">桃花姬 / IP 联名</span>
+                </span>
+                <span class="wcard-plus">+</span>
+              </span>
+            </div>
+            <div class="flip-back">
+              <span class="flip-back-kicker">整合策划</span>
+              <h4 class="flip-back-title">"桃出脆皮，Buff 升级"</h4>
+              <p class="flip-back-desc">桃花姬品牌策划：IP 联名与游戏化语言，接住年轻消费群体。</p>
+              <a class="flip-back-link" href="/portfolio/ejiao-campaign.pdf" target="_blank" rel="noopener">查看原件 ↗</a>
+              <span class="flip-hint">再次点击卡片返回</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wgroup">
+      <p class="kick fade-up" style="color: var(--onblack-dim);">媒体视觉 · 央广网 — 悬停自动滚动预览</p>
+      <div class="wgrid">
+        <a class="wcard fade-up" href="/portfolio/micro-video-poster.jpg" target="_blank" rel="noopener">
+          <span class="wcard-img pan pan-viewport"><img src="/portfolio/micro-video-poster.jpg" alt="长春微视频征集活动长图" loading="lazy"></span>
+          <span class="wcard-cap">
+            <span>
+              <span class="wcard-name">"逐梦奋斗，遇见美好" 微视频征集</span>
+              <span class="wcard-tags">政务主题传播 / 长图设计</span>
+            </span>
+            <span class="wcard-plus">+</span>
+          </span>
+        </a>
+        <a class="wcard fade-up" href="/portfolio/tcm-conference.jpg" target="_blank" rel="noopener">
+          <span class="wcard-img pan pan-viewport"><img src="/portfolio/tcm-conference.jpg" alt="世界中医药科技大会长图" loading="lazy"></span>
+          <span class="wcard-cap">
+            <span>
+              <span class="wcard-name">世界中医药科技大会 · 长春健博会</span>
+              <span class="wcard-tags">政务主题传播 / 长图设计</span>
+            </span>
+            <span class="wcard-plus">+</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <p class="works-sub">内部传播策略、竞对分析与创始人 IP 规划不在本站公开。</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <h2 class="footer-cta fade-up">如果合适，<br>我们聊聊。</h2>
+    <div class="footer-links fade-up">
+      <a class="pill-link solid" href="tel:16688219780">166 8821 9780</a>
+      <a class="pill-link" href="mailto:2772118314@qq.com">2772118314@qq.com</a>
+    </div>
+    <div class="footer-play" aria-label="保持好奇，鼠标划过文字试试"><p class="footer-letter-source" data-copy="personal-footer-signature">保持好奇。</p><div class="footer-letters" aria-hidden="true"></div><span class="footer-play-hint">MOVE YOUR CURSOR / 把好奇留给下一次相遇</span></div>
+    <div class="footer-meta">
+      <span>孙嘉鸿 · 东北师范大学 · 新闻与传播 2027 届</span>
+      <span>更新于 2026.10</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/personal/editor.js"></script>
+<script src="/personal/src/vendor/three.min.js"></script>
+<script src="/personal/src/vendor/gsap.min.js"></script>
+<script src="/personal/src/vendor/ScrollTrigger.min.js"></script>
+<script src="/personal/src/vendor/lenis.min.js"></script>
+<script src="/personal/src/main.js"></script>
+<script src="/personal/src/paper-drops.js"></script>
+<script src="/personal/src/smooth-motion.js"></script>
+</body>
+</html>
