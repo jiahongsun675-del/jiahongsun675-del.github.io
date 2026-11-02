@@ -68,7 +68,7 @@ gsap.registerPlugin(ScrollTrigger);
 var mm=gsap.matchMedia();
 mm.add('(prefers-reduced-motion: no-preference)',function(){
  gsap.fromTo('.hero-in',{y:32,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',stagger:.09,clearProps:'transform'});
- var targets=Array.from(document.querySelectorAll('.fade-up:not(.wcard),.ch-body p,.insight-title,.insight-body,.row-key,.row-val,.res-item-title,.res-item-sub,.footer-meta'));
+ var targets=Array.from(document.querySelectorAll('.fade-up:not(.wcard),.ch-body p,.insight-title,.insight-body,.row-key,.row-val,.res-item-title,.res-item-sub'));
  targets=targets.filter(function(el){return !el.parentElement.closest('.fade-up')&&!el.closest('.wcard');});
  targets.forEach(function(el){el.classList.add('motion-copy');gsap.fromTo(el,{y:28,opacity:0,clipPath:'inset(0 0 100% 0)'},{y:0,opacity:1,clipPath:'inset(0 0 0% 0)',duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 93%',once:true}});});
 });
