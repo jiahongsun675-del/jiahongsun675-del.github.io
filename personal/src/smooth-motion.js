@@ -5,7 +5,7 @@
     if(lenis){lenis.destroy();lenis=null;}cancelAnimationFrame(raf);
     document.documentElement.classList.remove('smooth-scroll');
     if(reduced.matches||document.body.classList.contains('editing')||!window.Lenis)return;
-    lenis=new Lenis({lerp:0.09,smoothWheel:true,syncTouch:false,wheelMultiplier:0.85,anchors:{offset:-80},prevent:function(node){return !!node.closest('.personal-editor,.flip-back,[contenteditable=true]');}});
+    lenis=new Lenis({lerp:0.09,smoothWheel:true,syncTouch:false,wheelMultiplier:0.85,anchors:{offset:-80},prevent:function(node){return !!node.closest('.personal-editor,.work-preview,[contenteditable=true]');}});
     document.documentElement.classList.add('smooth-scroll');
     lenis.on('scroll',function(){window.ScrollTrigger?.update();});
     function tick(time){if(!document.hidden)lenis?.raf(time);raf=requestAnimationFrame(tick);}raf=requestAnimationFrame(tick);
@@ -23,10 +23,11 @@
   rebuild();new MutationObserver(rebuild).observe(source,{childList:true,subtree:true,characterData:true});
   function tick(){
     var moving=false,rect=surface.getBoundingClientRect();
-    letters.forEach(function(l){
+    letters.forEach(function(l,i){
       var cx=l.el.offsetLeft+l.el.offsetWidth/2,cy=l.el.offsetTop+l.el.offsetHeight/2;
       var dx=px-cx,dy=py-cy,dist=Math.hypot(dx,dy),radius=Math.min(220,rect.width*.35);
       var power=inside?Math.pow(Math.max(0,1-dist/radius),2):0;
+      l.el.style.color=power>.02?['#e65b36','#7356c7','#d29909','#438e66','#347ccb'][i%5]:'';
       var tx=-dx*power*.2,ty=-power*55;
       l.vx=(l.vx+(tx-l.x)*.09)*.72;l.vy=(l.vy+(ty-l.y)*.09)*.72;l.x+=l.vx;l.y+=l.vy;
       l.el.style.transform='translate3d('+l.x+'px,'+l.y+'px,0) rotate('+(l.x*.13)+'deg) scaleY('+(1+power*.14)+')';

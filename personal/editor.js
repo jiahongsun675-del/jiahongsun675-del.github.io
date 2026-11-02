@@ -42,7 +42,7 @@
     e.spellcheck=false;
   });
   try {
-    var raw=localStorage.getItem(KEY), saved=JSON.parse(raw||'{}');
+    var raw=new URLSearchParams(location.search).has('baseline')?'{}':localStorage.getItem(KEY), saved=JSON.parse(raw||'{}');
     if(!raw){ var old=JSON.parse(localStorage.getItem('sunjiahong-story-portfolio-v1')||'{}'); elements.forEach(function(e){if(typeof old[e.dataset.copy]==='string')saved[e.dataset.copy]=old[e.dataset.copy];}); }
     if(saved&&typeof saved==='object'&&!Array.isArray(saved))Object.keys(saved).forEach(function(id){if(typeof saved[id]==='string')draft[id]=clean(saved[id]);});
   } catch(e){status.textContent='无法读取存档；请先备份文字';}
